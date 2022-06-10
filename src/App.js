@@ -12,39 +12,114 @@ const INGREDIENTS = [
   {name: 'Cheese', price: 20, image: cheeseImage, index: 1},
   {name: 'Salad', price: 5, image: saladImage, index: 2},
   {name: 'Bacon', price: 30, image: baconImage, index: 3},
-]
+];
 function App() {
 
-    const [ingredients, setIngredients] = useState([
-        // {name:'Meat', count: 0},
-        // {name:'Cheese', count: 0},
-        // {name:'Salad', count: 0},
-        // {name:'Bacon', count: 0},
-    ])
+    const [ingredients, setIngredients] = useState([]);
 
-    const onClick = index => {
-        const ingrid = INGREDIENTS.map(ing => {
-            if (ing.index === index) {
-                ingredients.push({name: ing.name, count: 0})
-                // console.log(ing.index)
-                return ing;
+    const changeIng = (index) => {
+        let wer = 0;
+            if (INGREDIENTS[index].name === "Meat") {
+                const countIng = ingredients
+                    .filter(ing => ing.name === 'Meat')
+                    .reduce((acc , ing) => acc + ing.count, 0);
             }
-            // return ing
-        });
+            if (INGREDIENTS[index].name === "Cheese") {
+                const countIng = ingredients
+                    .filter(ing => ing.name === 'Cheese')
+                    .reduce((acc, ing) => acc + ing.count, 0);
+                wer = countIng;
+            }
+            if (INGREDIENTS[index].name === "Salad") {
+                const countIng = ingredients
+                    .filter(ing => ing.name === 'Salad')
+                    .reduce((acc, ing) => acc + ing.count, 0);
+                wer = countIng;
+            }
+            if (INGREDIENTS[index].name === "Bacon") {
+                const countIng = ingredients
+                    .filter(ing => ing.name === 'Bacon')
+                    .reduce((acc, ing) => acc + ing.count, 0);
+                wer = countIng;
 
+            }
+    };
+
+    const countIng = (name) => {
         const ingredientsCopy = ingredients.map(ing => {
-            if (INGREDIENTS[index].name === ing.name) {
+            console.log(ing.name, name, ing.count)
+            if (ing.name === name) {
                 return {
                     ...ing,
                     count: ing.count + 1,
                 }
-                console.log(INGREDIENTS[index].name)
+            }
+            if (ing.name === name) {
+                return {
+                    ...ing,
+                    count: ing.count + 1,
+                }
+            }
+            if (ing.name === name) {
+                return {
+                    ...ing,
+                    count: ing.count + 1,
+                }
+            }
+            if (ing.name === name) {
+                return {
+                    ...ing,
+                    count: ing.count + 1,
+                }
+            }
+        });
+
+        setIngredients(ingredientsCopy);
+    };
+
+    const onClick = index => {
+        const ingrid = INGREDIENTS.map(ing => {
+            if (ing.index === index) {
+                ingredients.push({name: ing.name, count: 1});
+                return ing;
+            }
+
+        });
+
+        const ingredientsCopy = ingredients.map(ing => {
+            if (INGREDIENTS[index].name === "Meat") {
+
+                return {
+                    ...ing,
+                    count: ing.count + 1,
+                }
+            }
+            if (INGREDIENTS[index].name === "Cheese") {
+
+                return {
+                    ...ing,
+                    count: ing.count + 1,
+                }
+            }
+            if (INGREDIENTS[index].name === "Salad") {
+
+                return {
+                    ...ing,
+                    count: ing.count + 1,
+                }
+            }
+            if (INGREDIENTS[index].name === "Bacon") {
+
+                return {
+                    ...ing,
+                    count: ing.count + 1,
+                }
             }
         })
 
 
-        // setIngredients(ingredientsCopy);
-        console.log(ingredientsCopy)
+        setIngredients(ingredientsCopy);
+        changeIng(index)
     }
 
   return (
@@ -76,9 +151,19 @@ function App() {
                     <div className="Seeds1"></div>
                     <div className="Seeds2"></div>
                 </div>
-                <div className="Salad"></div>
-                <div className="Cheese"></div>
-                <div className="Meat"></div>
+                {
+                    ingredients.map(ing => {
+                        return (
+                            <div
+                                key={ing.index}
+                                className={ing.name}
+                            ></div>
+                        )
+                    })
+                }
+                {/*<div className="Salad"></div>*/}
+                {/*<div className="Cheese"></div>*/}
+                {/*<div className="Meat"></div>*/}
                 <div className="BreadBottom"></div>
                 <span>Price: </span>
             </div>
